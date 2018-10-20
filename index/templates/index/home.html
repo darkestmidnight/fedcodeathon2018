@@ -1,0 +1,8 @@
+<h2>Employees: </h2>
+<h2>
+    <a href="{% url 'logged_count' %}">
+        {% csrf_token %}
+        Employees
+    </a>
+</h2>
+<h2>{{ logged_user_count }}</h2>
