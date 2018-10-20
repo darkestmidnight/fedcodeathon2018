@@ -1,8 +1,13 @@
-<h2>Employees: </h2>
 <h2>
-    <a href="{% url 'logcount' %}">
+    <a href="localhost:8000/index/loggedusers">
         {% csrf_token %}
         Employees
+    </a> {{ logged_user_count }}
+</h2>
+
+<h2>
+    <a href="localhost:8000/index/settings/">
+        {% csrf_token %}
+        Settings
     </a>
 </h2>
-<h2>{{ logged_user_count }}</h2>

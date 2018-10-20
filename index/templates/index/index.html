@@ -1,10 +1,8 @@
-<h1>Logged in users</h1>
-<h2>Employees: </h2>
+<h2>Employees Logged in:</h2>
 <h2>{{ logged_users_count }}</h2>
 {% if logged_users %}
 <ul>
     {% for users in logged_users %}
-    <h2>test</h2>
     <h2>{{ users.username }}</h2>
     
     {% endfor %}

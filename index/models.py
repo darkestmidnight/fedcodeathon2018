@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.signals import user_logged_in, user_logged_out
 
+
 # Create your models here.
 #class Recognition(models.Model):
 #    name = models.Charfield(max_length=100)
@@ -13,6 +14,9 @@ class LoggedUser(models.Model):
   
   def __unicode__(self):
     return self.username
+
+class UpdateUserInfo(models.Model):
+  new_email = models.CharField(max_length=300)
 
 def login_user(sender, request, user, **kwargs):
   LoggedUser(username=user.username).save()
