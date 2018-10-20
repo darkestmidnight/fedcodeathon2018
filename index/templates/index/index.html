@@ -1,0 +1,9 @@
+<h1>Logged in users</h1>
+{% if logged_users %}
+<ul>
+    {% for users in logged_users %}
+    <h2>{{ users.username }}</h2>
+    
+    {% endfor %}
+</ul>
+{% endif %}
