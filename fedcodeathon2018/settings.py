@@ -92,7 +92,8 @@ DATABASES = {
         'USER':'root',
         'PASSWORD':'gzamtK^u4e!HV6y7',
         'HOST':'m4h.us',
-        'PORT':'3306'
+        'PORT':'3306',
+        'SCHEMA': 'VisoVerita',
     }
 }
 
