@@ -206,7 +206,7 @@
         <!-- Modal content -->
             <div class="modal-content">
                 <span class="close">&times;</span>
-                <!---<form>
+                <form>
                     Email:<br>
                     <input type="text" name="email">
                     <br>
@@ -214,12 +214,12 @@
                     <input type="text" name="phonenumber">
                     <br><br>
                     <input type="submit" value="Submit">
-                  </form>-->
-                  <form action="" method="POST" class="update_info-form">{% csrf_token %}
+                  </form>
+                  <!---<form action="" method="POST" class="update_info-form">{% csrf_token %}
                         {{ update_form.as_p }}
                         {{ profile_form.as_p }}
                         <button type="submit" class="save btn btn-default">Save</button>
-                    </form>
+                    </form>-->
             </div>
       
       </div>
