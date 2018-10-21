@@ -130,10 +130,9 @@
               <h1>Statistics </h1>
 
               <ul class="nav">
-                    <li><a href="./login.html/">Login</a></li>
-                    <li><a href="{% url 'logged:post_alert' %}">Admin</a></li>
+                    <li><a href="{% url 'logged:logged_count' %}">Home</a></li>
                     <li><a href="{% url 'logged:update_info' %}">Settings</a></li>
-                    <li><a href="/contact/">Contact</a></li>
+                    <li><a href="{% url 'logged:post_alert' %}">Admin</a></li>
                 </ul>
             </header>
 
@@ -164,7 +163,7 @@
         <!-- Modal content -->
             <div class="modal-content">
                 <span class="close">&times;</span>
-                <form>
+                <!---<form>
                     Email:<br>
                     <input type="text" name="email">
                     <br>
@@ -172,7 +171,12 @@
                     <input type="text" name="phonenumber">
                     <br><br>
                     <input type="submit" value="Submit">
-                  </form> 
+                  </form>-->
+                  <form action="" method="POST" class="update_info-form">{% csrf_token %}
+                        {{ update_form.as_p }}
+                        {{ profile_form.as_p }}
+                        <button type="submit" class="save btn btn-default">Save</button>
+                    </form>
             </div>
       
       </div>
