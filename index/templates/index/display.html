@@ -36,15 +36,18 @@
 		//This function would scan the person's face then access the
 		//database to retreive their name and access level.
 		function getEmployeeName() {
-			var names = ["Cooper Mahring", "Elly Richardson", "Parker Milum", "Hannah West"];
-			return names[Math.floor(Math.random()*names.length)];
+			return workgroups["employee"][Math.floor(Math.random()*workgroups["employee"].length)];
 		}
 
 		//Similar to the employees, this function would scan the person's 
 		//face then access the database to retreive their name and access level.
 		function getGuestName() {
-			var names = ["Annette Tetmeyer", "Jason Savage"];
-			return names[Math.floor(Math.random()*names.length)];
+			return workgroups["authorized_guest"][Math.floor(Math.random()*workgroups["authorized_guest"].length)];
+		}
+
+		//Same as previous functions, but unverified guests
+		function getUnverifiedName(){
+			return workgroups["unverified"][Math.floor(Math.random()*workgroups["unverified"].length)];
 		}
 
 		//Make sure that we know that they have access to the door, normally
@@ -52,75 +55,104 @@
 		//hard coded. I know this isn't pretty, but hard coding database values
 		//usually isn't.
 		function isAuthorized(door, name) {
-			switch(name) {
-				
-			}
+			var authorized = false;
+			var authLevels = access[door];
+			authLevels.forEach(function(a){
+				if(workgroups[a].includes(name)){
+					authorized = true;
+				}
+			});
+			return authorized;
 		}
 
 		//Door Select puts the door's name in the url so that
 		//we know who has permission to enter through the door.
 		var doorName=getUrlVars()["doorname"];
+		var personName="";
 
 		//This function changes the page to display the current
 		//status of the door and cameras.
 		function changeStatus(s) {
-			switch(s) {
-				case 0:
-					//waiting for scan...
-					document.getElementById("statusText").innerHTML = "Waiting for Scan...";
-					document.body.style.background = 'white';
-					break;
-				case 1:
-					//scanning...
-					document.getElementById("statusText").innerHTML = "Scanning...<br><img src=\"../../static/index/scanning.png\">";
-					document.body.style.background = 'white';
-					break;
-				case 2:
-					//admin access
-					document.getElementById("statusText").innerHTML = "Hello Admin";
-					document.body.style.background = 'blue';
-					break;
-				case 3:
-					//employee with regular access
-					var employeeName="";
-					//here we are getting a random employee name
-					employeeName="Cooper Mahring"
-					document.getElementById("statusText").innerHTML = "Hello " + getEmployeeName() + "!";
-					document.body.style.background = 'green';
-					break;
-				case 4:
-					//authorized gust
-					//could also tell the directions to appointments and message the appropriate
-					//employees that they are in the building.
-					document.getElementById("statusText").innerHTML = "Hello " + getGuestName() + "!";
-					document.body.style.background = 'green';
-					break;
-				case 5:
-					//unregistered guest
-					//We don't have their name and face registered, but we don't recognize them
-					//as a threat. They have access to the lobby, but nothing further.
-					document.getElementById("statusText").innerHTML = "Please visit front desk.";
-					document.body.style.background = 'yellow';
-					break;
-				case 6:
-					//unathorized
-					document.getElementById("statusText").innerHTML = "Unathorized, please leave.";
-					document.body.style.background = 'red';
-					break;
-				case 7:
-					//someone is leaving (who is authorized to)
-					document.getElementById("statusText").innerHTML = "Goodbye " + getEmployeeName();
-					document.body.style.background = 'green';
-				default:
-					//error
-					console.log(typeof s);
-					document.getElementById("statusText").innerHTML = "Error, please wait for assistance.";
-					document.body.style.background = 'red';
-					break;
+			if(isAuthorized(doorName, personName)){
+				switch(s) {
+					case 0:
+						//waiting for scan...
+						document.getElementById("statusText").innerHTML = "Waiting for Scan...";
+						document.body.style.background = 'white';
+						break;
+					case 1:
+						//scanning...
+						document.getElementById("statusText").innerHTML = "Scanning...<br><img src=\"../../static/index/scanning.png\">";
+						document.body.style.background = 'white';
+						break;
+					case 2:
+						//admin access
+						document.getElementById("statusText").innerHTML = "Hello Admin";
+						document.body.style.background = 'blue';
+						break;
+					case 3:
+						//here we are getting a random employee or verified guest name
+						var rand = Math.floor(Math.random()+1);
+						if(rand == 0){
+							document.getElementById("statusText").innerHTML = "Hello " + getEmployeeName() + "!";
+						} else {
+							document.getElementById("statusText").innerHTML = "Hello " + getGuestName() + "!";						
+						}
+						document.body.style.background = 'green';
+						break;
+					case 4:
+						//authorized gust
+						//could also tell the directions to appointments and message the appropriate
+						//employees that they are in the building.
+						document.getElementById("statusText").innerHTML = "Hello " + getUnverifiedName() + "!";
+						document.body.style.background = 'green';
+						break;
+					case 5:
+						//unregistered guest
+						//We don't have their name and face registered, but we don't recognize them
+						//as a threat. They have access to the lobby, but nothing further.
+						document.getElementById("statusText").innerHTML = "Please visit front desk.";
+						document.body.style.background = 'yellow';
+						break;
+					case 6:
+						//unathorized
+						document.getElementById("statusText").innerHTML = "Unathorized, please leave.";
+						document.body.style.background = 'red';
+						break;
+					case 7:
+						//someone is leaving (who is authorized to)
+						document.getElementById("statusText").innerHTML = "Goodbye " + getEmployeeName();
+						document.body.style.background = 'green';
+					default:
+						//error
+						console.log(typeof s);
+						document.getElementById("statusText").innerHTML = "Error, please wait for assistance.";
+						document.body.style.background = 'red';
+						break;
+				}
+			} else {
+				//Not Authorized
+				document.getElementById("statusText").innerHTML = "Unathorized, please leave.";
+				document.body.style.background = 'red';
 			}
 		}
 		
 		var status=0;
+		var personName="";
+
+		//This would be replaced by database entries
+		workgroups = [];
+		workgroups["admin"] = ["Cooper Mahring"];
+		workgroups["employee"] = ["Cooper Mahring", "Elly Richardson", "Parker Milum", "Hannah West"];
+		workgroups["authorized_guest"] = ["Annette Tetmeyer", "Jason Savage"];
+		workgroups["unverified"] = ["Phil Smith"];
+		workgroups["banned"] = ["Joe Random"]; //DO NOT LET IN
+
+		var access=[];
+		access["main_entrence"] = ["admin", "employee", "authorized_guest", "unverified"];
+		access["side_entrence"] = ["admin", "employee", "authorized_guest"];
+		access["lobby_side_door"] = ["admin", "employee", "authorized_guest"];
+		access["server"] = ["admin"];
 
 		//Normally this would be integrated with a server which keeps
 		//track of who is allowed where and this would display the status
