@@ -10,7 +10,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 What things you need to install the software and how to install them
 
-####Windows:
+#### Windows:
 Install Python3 from [https://www.python.org/downloads/](https://www.python.org/downloads/)
 **Make sure 'pip' is checked when installing**
 
@@ -22,7 +22,7 @@ pip install django
 pip install mysqlclient
 ```
 
-####Ubuntu/Debian:
+#### Ubuntu/Debian:
 ```
 $ sudo apt-get install python3 -y
 $ curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
@@ -37,14 +37,14 @@ $ sudo pip install mysqlclient
 
 From the Command Prompt, initialize the project.
 
-####Windows:
+#### Windows:
 
 ```
 cd C:\path\to\fedcodathon2018
 python manage.py migrate
 ```
 
-####Ubuntu/Debian:
+#### Ubuntu/Debian:
 
 ```
 cd /path/to/fedcodathon2018
@@ -76,10 +76,10 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 ## Authors
 
-* **Cooper Mahring** - *Database* - [coopmaster](https://github.com/coopmaster)
-* **Hannah West** - *Database* - [hannah-west](https://github.com/hannah-west)
-* **Elly Richardson** - *Database* - [darkestmidnight](https://github.com/darkestmidnight)
-* **Parker Milum** - *Database* - [coopmaster](https://github.com/coopmaster)
+* **Cooper Mahring** - *Database/UI Design* - [coopmaster](https://github.com/coopmaster)
+* **Hannah West** - *UI Design* - [hannah-west](https://github.com/hannah-west)
+* **Elly Richardson** - *Back End Functionality* - [darkestmidnight](https://github.com/darkestmidnight)
+* **Parker Milum** - *Video and Presentation* - [coopmaster](https://github.com/coopmaster)
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
