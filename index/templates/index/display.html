@@ -1,0 +1,111 @@
+<table style="width: 100%; height: 100%;">
+	<tr>
+		<td id="statusText" style="vertical-align: center; text-align: center; font-size: xx-large; font-weight: bold; width: 30%">
+			Waiting for Scan...
+		</td>
+	</tr>
+</table>
+
+<script>
+	// sleep time expects milliseconds
+	//https://stackoverflow.com/questions/951021/what-is-the-javascript-version-of-sleep/39914235#39914235
+	function sleep (time) {
+	  return new Promise((resolve) => setTimeout(resolve, time));
+	}
+
+	//This function would scan the person's face then access the
+	//database to retreive their name and access level.
+	function getEmployeeName() {
+		var names = ["Cooper Mahring", "Elly Richardson", "Parker Milum", "Hannah West"];
+		return names[Math.floor(Math.random()*names.length)];
+	}
+
+	//Similar to the employees, this function would scan the person's 
+	//face then access the database to retreive their name and access level.
+	function getGuestName() {
+		var names = ["Annette Tetmeyer", "Jason Savage"];
+		return names[Math.floor(Math.random()*names.length)];
+	}
+
+	//This function changes the page to display the current
+	//status of the door and cameras.
+	function changeStatus(s) {
+		switch(s) {
+			case 0:
+				//waiting for scan...
+				document.getElementById("statusText").innerHTML = "Waiting for Scan...";
+				document.body.style.background = 'white';
+				break;
+			case 1:
+				//scanning...
+				document.getElementById("statusText").innerHTML = "Scanning...";
+				document.body.style.background = 'white';
+				break;
+			case 2:
+				//admin access
+				document.getElementById("statusText").innerHTML = "Hello Admin";
+				document.body.style.background = 'blue';
+				break;
+			case 3:
+				//employee with regular access
+				var employeeName="";
+				//here we are getting a random employee name
+				employeeName="Cooper Mahring"
+				document.getElementById("statusText").innerHTML = "Hello " + getEmployeeName() + "!";
+				document.body.style.background = 'green';
+				break;
+			case 4:
+				//authorized gust
+				//could also tell the directions to appointments and message the appropriate
+				//employees that they are in the building.
+				document.getElementById("statusText").innerHTML = "Hello " + getGuestName() + "!";
+				document.body.style.background = 'green';
+				break;
+			case 5:
+				//unregistered guest
+				//We don't have their name and face registered, but we don't recognize them
+				//as a threat. They have access to the lobby, but nothing further.
+				document.getElementById("statusText").innerHTML = "Please visit front desk.";
+				document.body.style.background = 'yellow';
+				break;
+			case 6:
+				//unathorized
+				document.getElementById("statusText").innerHTML = "Unathorized, please leave.";
+				document.body.style.background = 'red';
+				break;
+			case 7:
+				//someone is leaving (who is authorized to)
+				document.getElementById("statusText").innerHTML = "Goodbye " + getEmployeeName();
+				document.body.style.background = 'green';
+			default:
+				//error
+				console.log(typeof s);
+				document.getElementById("statusText").innerHTML = "Error, please wait for assistance.";
+				document.body.style.background = 'red';
+				break;
+		}
+	}
+	
+	var status=0;
+
+	//Normally this would be integrated with a server which keeps
+	//track of who is allowed where and this would display the status
+	//for the assigned door, but we will just show the different
+	//status displays using random numbers and a loop for now.
+	setInterval(function() {
+		//The logic here is to make sure the status follows the pattern
+		//it would normally take in a real world situation.
+		if(status == 0){
+			status=1;
+		} else if (status == 1){
+			//after scanning we only want to go to a status which displays
+			//what access they have. In a real world system this could also
+			//go back to a status of waiting for scan as well.
+			status=Math.floor(Math.random() * (7-2)) + 2;
+		} else{
+			status=0;
+		}
+
+		changeStatus(Math.floor(status));
+	},2000);//2 seconds (in ms)
+</script>

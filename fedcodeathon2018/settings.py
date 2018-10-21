@@ -85,6 +85,18 @@ DATABASES = {
     }
 }
 
+#DATABASES = {
+#    'default':{
+#        'ENGINE':'django.db.backends.mysql',
+#        'NAME':'2018codathon',
+#        'USER':'root',
+#        'PASSWORD':'gzamtK^u4e!HV6y7',
+#        'HOST':'m4h.us',
+#        'PORT':'3306',
+#        'SCHEMA': 'VisoVerita',
+#    }
+#}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -123,3 +135,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+LOGIN_REDIRECT_URL = '/index/'

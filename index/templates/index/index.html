@@ -1,0 +1,10 @@
+<h2>Employees Logged in:</h2>
+<h2>{{ logged_users_count }}</h2>
+{% if logged_users %}
+<ul>
+    {% for users in logged_users %}
+    <h2>{{ users.username }} {{ users.office_location }}</h2>
+    
+    {% endfor %}
+</ul>
+{% endif %}
