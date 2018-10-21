@@ -96,8 +96,8 @@
 
         /* Modal Content */
         .modal-content {
-            background-color: #fefefe;
-            color: black;
+            background-color: #ececec;
+            color: #7a7a7a;
             margin: auto;
             padding: 20px;
             border: 1px solid #888;
@@ -113,7 +113,14 @@
             font-weight: bold;
         }
 
+        input[type="submit"] {
+            background-color: #70c5c0;
+            color: white;
+        }
 
+        input {
+            display: inline;
+        }
         
         
     </style>
@@ -125,8 +132,7 @@
 
               <ul class="nav">
                     <li><a href="./login.html/">Login</a></li>
-                    <li><a href="/admin/">Admin</a></li>
-                    <li><a href="/settings/">Settings</a></li>
+                    <li><a href="./admin.html/">Admin</a></li>
                     <li><a href="/contact/">Contact</a></li>
                 </ul>
             </header>
@@ -153,10 +159,17 @@
                 <span class="close">&times;</span>
                 <form>
                     Email:<br>
-                    <input type="text" name="email">
+                    <input type="email" name="email" placeholder="Email" required>
+                    <input type="checkbox" name="subemail">
                     <br>
                     Phone Number:<br>
-                    <input type="text" name="phonenumber">
+                    <input type="tel" name="phonenumber" placeholder="Phone Number" required>
+                    <input type="checkbox" name="subtexts">
+                    <br><br>
+                    Emergency Contact:<br>
+                    <input type="text" name="emergencycontname" placeholder="Name" required>
+                    <br><br>
+                    <input type="tel" name="emergencycontnum" placeholder="Phone Number" required>
                     <br><br>
                     <input type="submit" value="Submit">
                   </form> 
