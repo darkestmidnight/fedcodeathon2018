@@ -69,11 +69,10 @@
         padding: 20px;
         font-size: 125%;
         margin-top: 10px;
-        padding-bottom: 40px;
+        padding-bottom: 60px;
         }
 
         textarea {
-            
             height: 60%;
             margin-top: 8px;
             -webkit-box-sizing: border-box;
@@ -82,9 +81,9 @@
             width: 100%;
         }
 
-        input[type="submit"] {
+        input[type="submit"], button {
             display: block;
-            background-color: #70c5c0; /* Green */
+            background-color: #70c5c0; 
             border: none;
             color: white;
             padding: 5px 20px;
@@ -115,25 +114,36 @@
               <ul class="nav">
                     <li><a href="./login.html/">Login</a></li>
                     <li><a href="./admin.html/">Admin</a></li>
-                    <li><a href="/contact/">Contact</a></li>
+                    <li><a href="./alerts/">Alerts</a></li>
                 </ul>
             </header>
-
         </div>
         
             <div class="wrapper">
                 <div class="box a">
-                    Send a Security Alert:
+                    <u>Send a Security Alert:</u><br><br/>
                     <input type="text" placeholder="Enter title here...">
                     <textarea placeholder="Enter your alert here..."></textarea>
                     <input type="submit" value="Send Alert">
                 </div>
                 <div class="box b">
-                    Add/Delete Users:
-                    
+                    <u>Add/Delete Users:</u><br><br/>
+                    Add User:
+                    <input type="name" placeholder="User ID">
+                    <button>+</button><br><br/>
+                    Delete User:
+                    <input type="name" placeholder="User ID">
+                    <button>-</button><br><br/>
+                    Set User Privileges:
+                    <select>
+                            <option value="Guest">Guest</option>
+                            <option value="Basic User">Basic User</option>
+                            <option value="Admin">Admin</option>
+                    </select>
+                    <input type="submit" value="Submit">
                 </div>
                 <div class="box c">
-                    Camera Feeds:
+                    <u>Camera Feeds:</u>
                 </div>
             </div>
 
