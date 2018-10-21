@@ -74,28 +74,28 @@ WSGI_APPLICATION = 'fedcodeathon2018.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-#DATABASES = {
-#    'default':{
-#        'ENGINE':'django.db.backends.mysql',
-#        'NAME':'kufragmentdevs',
-#        'USER':'root',
-#        'PASSWORD':'fedcodeathon',
-#        'HOST':'localhost',
-#        'PORT':''
-#    }
-#}
-
 DATABASES = {
     'default':{
         'ENGINE':'django.db.backends.mysql',
-        'NAME':'2018codathon',
+        'NAME':'kufragmentdevs',
         'USER':'root',
-        'PASSWORD':'gzamtK^u4e!HV6y7',
-        'HOST':'m4h.us',
-        'PORT':'3306',
-        'SCHEMA': 'VisoVerita',
+        'PASSWORD':'fedcodeathon',
+        'HOST':'localhost',
+        'PORT':''
     }
 }
+
+#DATABASES = {
+#    'default':{
+#        'ENGINE':'django.db.backends.mysql',
+#        'NAME':'2018codathon',
+#        'USER':'root',
+#        'PASSWORD':'gzamtK^u4e!HV6y7',
+#        'HOST':'m4h.us',
+#        'PORT':'3306',
+#        'SCHEMA': 'VisoVerita',
+#    }
+#}
 
 
 # Password validation
