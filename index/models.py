@@ -3,6 +3,7 @@ from django.contrib.auth.signals import user_logged_in, user_logged_out
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.utils.text import slugify
 
 
 # Create your models here.
@@ -44,3 +45,22 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
+
+class Alerts(models.Model):
+    title = models.CharField(max_length=30)
+    description = models.TextField(max_length=150)
+    publish_date = models.DateTimeField(auto_now=False, auto_now_add=True)
+    slug = models.SlugField(unique=True)
+
+    def __str__(self):
+        return self.title
+
+    def save(self, *args, **kwargs):
+        # Generates a random string 
+        #unique_string = get_random_string(length=6)
+
+        # Combines title and unique string to slugify for unique url
+        slugtext = self.title 
+        self.slug = slugify(slugtext)
+
+        return super(Alerts, self).save(*args, **kwargs)
