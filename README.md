@@ -79,7 +79,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 * **Cooper Mahring** - *Database/UI Design* - [coopmaster](https://github.com/coopmaster)
 * **Hannah West** - *UI Design* - [hannah-west](https://github.com/hannah-west)
 * **Elly Richardson** - *Back End Functionality* - [darkestmidnight](https://github.com/darkestmidnight)
-* **Parker Milum** - *Video and Presentation* - [coopmaster](https://github.com/coopmaster)
+* **Parker Milum** - *Video and Presentation* - [Pmilum](https://github.com/Pmilum)
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
