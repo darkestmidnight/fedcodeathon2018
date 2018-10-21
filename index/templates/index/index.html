@@ -3,8 +3,14 @@
 {% if logged_users %}
 <ul>
     {% for users in logged_users %}
-    <h2>{{ users.username }} {{ users.office_location }}</h2>
-    
+        <h2>{{ users.username }}</h2>
     {% endfor %}
+    <!--{% for log_users in logged_users %}
+        {% for the_users.username in logged_users %}
+            {% if com_user.username == log_users %}
+            <h2>{{ com_users.username }} {{com_username.last_login}</h2>
+            {% endif %}
+        {% endfor %}
+    {% endfor %}-->
 </ul>
 {% endif %}

@@ -6,14 +6,19 @@ from django.contrib.auth.decorators import login_required
 from .forms import UpdateUserInfoForm, UpdateUserProfileForm
 from django.contrib import messages
 from django.db import transaction
+from django.contrib.auth.models import User
 
 # Create your views here.
 
 #collects the logged users
 def logged(request):  
   logged_users = LoggedUser.objects.all().order_by('username')
+  user_location = Profile.objects.all()
+  the_user = User.objects.all()
   context = {
       'logged_users':logged_users,
+      'user_location':user_location,
+      'the_user':the_user,
   }
 
   return render(request, 'index/index.html', context)
