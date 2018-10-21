@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.template import RequestContext
 from .models import LoggedUser, Profile, Alerts
 from django.views.decorators.csrf import requires_csrf_token
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from .forms import UpdateUserInfoForm, UpdateUserProfileForm, AlertsForm
 from django.contrib import messages
 from django.db import transaction
@@ -66,6 +66,7 @@ def user_settings(request):
 
     return render(request, 'index/settings.html', context)
 
+@user_passes_test(lambda u: u.is_staff)
 def post_alert(request):
     alert_form = AlertsForm(request.POST or None)
     if alert_form.is_valid():
@@ -79,6 +80,7 @@ def post_alert(request):
 
     return render(request, 'index/admin.html', context)
 
+@user_passes_test(lambda u: u.is_staff)
 def list_alert(request):
     alerts_list = Alerts.objects.all().order_by("-publish_date")
 
@@ -88,6 +90,7 @@ def list_alert(request):
 
     return render(request, 'index/systemalerts.html', context)
 
+@user_passes_test(lambda u: u.is_staff)
 def view_alert(request, slug):
     posted_alert = get_object_or_404(Alerts, slug=slug)
     context = {
