@@ -5,6 +5,13 @@
     <meta name="Door Display" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>VisoVerita</title>
+    <style type="text/css">
+    	html, body {
+    		height: 100%;
+    		width: 100%;
+    		margin: 0 auto;
+    	}
+    </style>
 </head>
 <body style="width: 100%; height: 100%;">
 	<table style="width: 100%; height: 100%;">
@@ -40,9 +47,22 @@
 			return names[Math.floor(Math.random()*names.length)];
 		}
 
+		//Make sure that we know that they have access to the door, normally
+		//this would be a database call, but for demonstration purposes its 
+		//hard coded. I know this isn't pretty, but hard coding database values
+		//usually isn't.
+		function isAuthorized(door, name) {
+			switch(name) {
+				
+			}
+		}
+
+		//Door Select puts the door's name in the url so that
+		//we know who has permission to enter through the door.
+		var doorName=getUrlVars()["doorname"];
+
 		//This function changes the page to display the current
 		//status of the door and cameras.
-		console.log(getUrlVars());
 		function changeStatus(s) {
 			switch(s) {
 				case 0:
@@ -52,7 +72,7 @@
 					break;
 				case 1:
 					//scanning...
-					document.getElementById("statusText").innerHTML = "Scanning...";
+					document.getElementById("statusText").innerHTML = "Scanning...<br><img src=\"../../static/index/scanning.png\">";
 					document.body.style.background = 'white';
 					break;
 				case 2:

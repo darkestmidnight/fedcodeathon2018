@@ -1,27 +1,71 @@
-<h2>
-    <!--<a href="localhost:8000/index/loggedusers/">-->
-    <a href="{% url 'logged:logged_users' %}">
-        {% csrf_token %}
-        Employees:
-    </a> {{ logged_user_count }}
-</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VisaVerita</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+<style type="text/css">
+	body {
+		color: #fff;
+		background: #d47677;
+    }
+    .all-seeing {
+        max-width: 60%;
+    }
+    .home-page {
+        background: #ececec;
+        max-width: 60%;
+        margin: auto;
+    }
 
-<h2>
-    <a href="{% url 'logged:post_alert' %}">
-            {% csrf_token %}
-            Master
-        </a>
-    </h2>
-<h2>
-    <a href="{% url 'logged:update_info' %}">
-        {% csrf_token %}
-        Settings
-    </a>
-</h2>
+    .float-left{
+        float: left;
+        margin: 1px 10px 1px 30px;
+    }
 
-<h2>Info: {{ user_email }}</h2>
-<h2>Phone: {{ user_profile.phone_number }}</h2>
-<h2>Emergency Contact: {{ user_profile.emergency_contact }}</h2>
-<h2>Office Location: {{ user_profile.office_location }}</h2>
-
-<h2><a href="{% url 'logged:list_alert' %}" >Alerts: </a> {{ alerts_on }}</h2>
+    .float-right{
+        float:left;
+        margin: 1px 30px 1px 10px;
+    }
+</style>
+</head>
+<body>
+<div class="all-seeing">
+        <div class="float-left">
+                <h2 class="text-center"><a href="{% url 'logged:logged_users' %}">
+                    {% csrf_token %}
+                    Employees:
+                    </a> {{ logged_user_count }}
+                </h2>
+            </div>
+            <div class="float-right">
+                <h2 class="text-center">
+                    <a href="{% url 'logged:post_alert' %}">
+                        {% csrf_token %}
+                        Master
+                    </a>
+                </h2>
+            </div>
+            <div class="home-page">
+                <!---->
+                <h2 class="text-center">
+                    <a href="{% url 'logged:update_info' %}">
+                            {% csrf_token %}
+                            Settings
+                    </a>
+                </h2>
+                <h2 class="text-center">Info: {{ user_email }}</h2>
+                <h2 class="text-center">Phone: {{ user_profile.phone_number }}</h2>
+                <h2 class="text-center">Emergency Contact: {{ user_profile.emergency_contact }}</h2>
+                <h2 class="text-center">Office Location: {{ user_profile.office_location }}</h2>
+            
+                <h2 class="text-center"><a href="{% url 'logged:list_alert' %}" >Alerts: </a> {{ alerts_on }}</h2>
+            </div>
+</div>
+</body>
+</html>   
