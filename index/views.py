@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.template import RequestContext
 from .models import LoggedUser
 from django.views.decorators.csrf import requires_csrf_token
@@ -25,21 +25,26 @@ def logged(request):
 @requires_csrf_token
 def logged_count(request):
     logged_user_count = LoggedUser.objects.count()
+    user_email = request.user.email
 
     context = {
         'logged_user_count': logged_user_count,
+        'user_email': user_email,
     }
 
     return render(request, 'index/home.html', context)
 
-# updates the user settings //needs fixing
+# updates the user settings 
 def user_settings(request):
     if request.method == 'POST':
-        updateForm = UpdateUserInfoForm(request.POST)
-        User.objects.get(username=LoggedUser.username).update(email=request.POST['new_email'])
+        updateForm = UpdateUserInfoForm(request.POST, instance=request.user)
+
+        if updateForm.is_valid():
+            updateInfo = updateForm.save(commit=False)
+            updateInfo.save()
 
     else:
-        updateForm = UpdateUserInfoForm()
+        updateForm = UpdateUserInfoForm(instance=request.user)
 
     context = {
         'update_form': updateForm,

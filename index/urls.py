@@ -1,7 +1,7 @@
 from django.urls import re_path, include
 from . import views
 
-app_name='logged_count'
+app_name='logged'
 
 # pages for the webapp.
 urlpatterns = [

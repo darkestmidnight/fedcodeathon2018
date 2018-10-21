@@ -15,9 +15,6 @@ class LoggedUser(models.Model):
   def __unicode__(self):
     return self.username
 
-class UpdateUserInfo(models.Model):
-  new_email = models.CharField(max_length=300)
-
 def login_user(sender, request, user, **kwargs):
   LoggedUser(username=user.username).save()
 

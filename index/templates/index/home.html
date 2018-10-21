@@ -1,13 +1,16 @@
 <h2>
-    <a href="localhost:8000/index/loggedusers">
+    <!--<a href="localhost:8000/index/loggedusers/">-->
+    <a href="{% url 'logged:logged_users' %}">
         {% csrf_token %}
         Employees
     </a> {{ logged_user_count }}
 </h2>
 
 <h2>
-    <a href="localhost:8000/index/settings/">
+    <a href="{% url 'logged:update_info' %}">
         {% csrf_token %}
         Settings
     </a>
 </h2>
+
+<h2>Info: {{ user_email }}</h2>

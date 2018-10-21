@@ -1,8 +1,8 @@
 from django import forms
-from .models import UpdateUserInfo
+from django.contrib.auth.models import User
 
 class UpdateUserInfoForm(forms.ModelForm):
-
+    email = forms.EmailField(required=True)
     class Meta:
-        model = UpdateUserInfo
-        fields = ('new_email',)
+        model = User
+        fields = ('email',)

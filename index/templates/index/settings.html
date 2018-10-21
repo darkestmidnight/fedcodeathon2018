@@ -1,5 +1,9 @@
 <h1>Settings</h1>
-<form method="POST" class="update_info-form">{% csrf_token %}
+<form action="" method="POST" class="update_info-form">{% csrf_token %}
     {{ update_form.as_p }}
     <button type="submit" class="save btn btn-default">Save</button>
+</form>
+
+<form action="{% url 'logged:logged_count' %}">
+    <input type="submit" value="Go to logged employee count" />
 </form>
