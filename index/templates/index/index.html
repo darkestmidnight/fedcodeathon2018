@@ -1,9 +1,9 @@
-<h2>Employees Logged in:</h2>
+<h2>Employees Logged In and Location</h2>
 <h2>{{ logged_users_count }}</h2>
 {% if logged_users %}
 <ul>
     {% for users in logged_users %}
-        <h2>{{ users.username }}</h2>
+        <h2>{{ users.username }} - BEST Server Room</h2> 
     {% endfor %}
     <!--{% for log_users in logged_users %}
         {% for the_users.username in logged_users %}

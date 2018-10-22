@@ -7,8 +7,14 @@ from .forms import UpdateUserInfoForm, UpdateUserProfileForm, AlertsForm
 from django.contrib import messages
 from django.db import transaction
 from django.contrib.auth.models import User
+from random import randint
 
 # Create your views here.
+def doors_election(request):
+    return render(request, 'index/scanning_in/doorselect.html')
+
+def display(request):
+    return render(request, 'index/scanning_in/display.html')
 
 #collects the logged users
 def logged(request):  

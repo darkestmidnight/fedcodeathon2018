@@ -2,6 +2,10 @@
 
 Viso Verita is a security automation server which helps make security easy while also more secure. Viso Verita additionally can automatically clock in and out employees to save time and increase accuracy of timesheets.
 
+## Planned Future Enhancements 
+
+Implement the capability to use facial recognition to login to computer and startup applications commonly used by user. The user will be able to enable and disable startup applications. This will ultimately save the user and company time by optimizing the startup process. 
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.

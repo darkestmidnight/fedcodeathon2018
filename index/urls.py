@@ -11,4 +11,6 @@ urlpatterns = [
     re_path(r'^administrators/', views.post_alert, name="post_alert"),
     re_path(r'^alerts/$', views.list_alert, name="list_alert"),
     re_path(r'^alerts/(?P<slug>[\w-]+)/$', views.view_alert, name="view_alert"),
+    re_path(r'^display/', views.display, name="display"),
+    re_path(r'^doorselection/', views.doors_election, name="door_selecttion")
 ]
