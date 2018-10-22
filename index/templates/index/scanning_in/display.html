@@ -33,21 +33,13 @@
 		    return vars;
 		}
 
-		//This function would scan the person's face then access the
-		//database to retreive their name and access level.
-		function getEmployeeName() {
-			return workgroups["employee"][Math.floor(Math.random()*workgroups["employee"].length)];
-		}
-
-		//Similar to the employees, this function would scan the person's 
-		//face then access the database to retreive their name and access level.
-		function getGuestName() {
-			return workgroups["authorized_guest"][Math.floor(Math.random()*workgroups["authorized_guest"].length)];
-		}
-
-		//Same as previous functions, but unverified guests
-		function getUnverifiedName(){
-			return workgroups["unverified"][Math.floor(Math.random()*workgroups["unverified"].length)];
+		//Facial recognition would go here. If they are recognized from 
+		//our database, then their name should be valid. If they aren't
+		//then they are a unverified guest.
+		function getName(){
+			var grps = Object.keys( workgroups );
+			var grp = grps[Math.floor(Math.random()*grps.length)];
+			return workgroups[grp][Math.floor(Math.random()*workgroups[grp].length)];
 		}
 
 		//Make sure that we know that they have access to the door, normally
@@ -55,6 +47,10 @@
 		//hard coded. I know this isn't pretty, but hard coding database values
 		//usually isn't.
 		function isAuthorized(door, name) {
+			if(door == ""){
+				console.log("Error: Invalid Door");
+				return false;
+			}
 			var authorized = false;
 			var authLevels = access[door];
 			authLevels.forEach(function(a){
@@ -73,67 +69,42 @@
 		//This function changes the page to display the current
 		//status of the door and cameras.
 		function changeStatus(s) {
-			if(isAuthorized(doorName, personName)){
-				switch(s) {
-					case 0:
-						//waiting for scan...
-						document.getElementById("statusText").innerHTML = "Waiting for Scan...";
-						document.body.style.background = 'white';
-						break;
-					case 1:
-						//scanning...
-						document.getElementById("statusText").innerHTML = "Scanning...<br><img src=\"../../static/index/scanning.png\">";
-						document.body.style.background = 'white';
-						break;
-					case 2:
-						//admin access
-						document.getElementById("statusText").innerHTML = "Hello Admin";
-						document.body.style.background = 'blue';
-						break;
-					case 3:
-						//here we are getting a random employee or verified guest name
-						var rand = Math.floor(Math.random()+1);
-						if(rand == 0){
-							document.getElementById("statusText").innerHTML = "Hello " + getEmployeeName() + "!";
-						} else {
-							document.getElementById("statusText").innerHTML = "Hello " + getGuestName() + "!";						
-						}
-						document.body.style.background = 'green';
-						break;
-					case 4:
-						//authorized gust
-						//could also tell the directions to appointments and message the appropriate
-						//employees that they are in the building.
-						document.getElementById("statusText").innerHTML = "Hello " + getUnverifiedName() + "!";
-						document.body.style.background = 'green';
-						break;
-					case 5:
-						//unregistered guest
-						//We don't have their name and face registered, but we don't recognize them
-						//as a threat. They have access to the lobby, but nothing further.
-						document.getElementById("statusText").innerHTML = "Please visit front desk.";
-						document.body.style.background = 'yellow';
-						break;
-					case 6:
-						//unathorized
-						document.getElementById("statusText").innerHTML = "Unathorized, please leave.";
-						document.body.style.background = 'red';
-						break;
-					case 7:
-						//someone is leaving (who is authorized to)
-						document.getElementById("statusText").innerHTML = "Goodbye " + getEmployeeName();
-						document.body.style.background = 'green';
-					default:
-						//error
-						console.log(typeof s);
-						document.getElementById("statusText").innerHTML = "Error, please wait for assistance.";
-						document.body.style.background = 'red';
-						break;
-				}
-			} else {
-				//Not Authorized
-				document.getElementById("statusText").innerHTML = "Unathorized, please leave.";
-				document.body.style.background = 'red';
+			switch(s) {
+				case 0:
+					//waiting for scan...
+					document.getElementById("statusText").innerHTML = "Waiting for Scan...";
+					document.body.style.background = 'white';
+					break;
+				case 1:
+					//scanning...
+					document.getElementById("statusText").innerHTML = "Scanning...<br><img src=\"../../../static/index/scanning.png\">";
+					document.body.style.background = 'white';
+					personName = getName();
+					console.log(personName);
+					break;
+				case 2:
+					//here we are getting a random employee or verified guest name
+					document.getElementById("statusText").innerHTML = "Hello " + personName + "!";
+					document.body.style.background = 'green';
+					break;
+				case 3:
+					//unregistered guest
+					//We don't have their name and face registered, but we don't recognize them
+					//as a threat. They have access to the lobby, but nothing further.
+					document.getElementById("statusText").innerHTML = "Please visit front desk.";
+					document.body.style.background = 'yellow';
+					break;
+				case 4:
+					//unathorized
+					document.getElementById("statusText").innerHTML = "Unathorized, please leave.";
+					document.body.style.background = 'red';
+					break;
+				default:
+					//error
+					console.log(typeof s);
+					document.getElementById("statusText").innerHTML = "Error, please wait for assistance.";
+					document.body.style.background = 'red';
+					break;
 			}
 		}
 		
@@ -145,7 +116,7 @@
 		workgroups["admin"] = ["Cooper Mahring"];
 		workgroups["employee"] = ["Cooper Mahring", "Elly Richardson", "Parker Milum", "Hannah West"];
 		workgroups["authorized_guest"] = ["Annette Tetmeyer", "Jason Savage"];
-		workgroups["unverified"] = ["Phil Smith"];
+		workgroups["unverified"] = ["", "Phil Smith"];
 		workgroups["banned"] = ["Joe Random"]; //DO NOT LET IN
 
 		var access=[];
@@ -159,6 +130,7 @@
 		//for the assigned door, but we will just show the different
 		//status displays using random numbers and a loop for now.
 		setInterval(function() {
+
 			//The logic here is to make sure the status follows the pattern
 			//it would normally take in a real world situation.
 			if(status == 0){
@@ -167,8 +139,17 @@
 				//after scanning we only want to go to a status which displays
 				//what access they have. In a real world system this could also
 				//go back to a status of waiting for scan as well.
-				status=Math.floor(Math.random() * (7-2)) + 2;
-			} else{
+				if(isAuthorized(doorName,personName)){
+					if(workgroups["unverified"].includes(personName)){
+						status = 3;
+					} else {
+						status = 2;
+					}
+				} else {
+					status = 4;
+				}
+				//status=Math.floor(Math.random() * (5-2)) + 2;
+			} else {
 				status=0;
 			}
 
