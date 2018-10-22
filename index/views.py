@@ -10,9 +10,11 @@ from django.contrib.auth.models import User
 from random import randint
 
 # Create your views here.
+# function to return door selection page
 def doors_election(request):
     return render(request, 'index/scanning_in/doorselect.html')
 
+# function to return door display
 def display(request):
     return render(request, 'index/scanning_in/display.html')
 
