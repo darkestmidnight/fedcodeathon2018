@@ -1,16 +1,53 @@
-<h2>Employees Logged In and Location</h2>
-<h2>{{ logged_users_count }}</h2>
-{% if logged_users %}
-<ul>
-    {% for users in logged_users %}
-        <h2>{{ users.username }} - BEST Server Room</h2> 
-    {% endfor %}
-    <!--{% for log_users in logged_users %}
-        {% for the_users.username in logged_users %}
-            {% if com_user.username == log_users %}
-            <h2>{{ com_users.username }} {{com_username.last_login}</h2>
-            {% endif %}
-        {% endfor %}
-    {% endfor %}-->
-</ul>
-{% endif %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>System Alerts</title>
+
+    <style>
+
+        body {
+            width: 100%;
+            color: #fff;
+            background: #d47677;
+            font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+        }
+
+        .etch1 {
+            max-width: 700px;
+            margin-left: 385px;
+        }
+
+        .content {
+
+            max-width: 500px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: darkgrey;  
+            border-radius: 5px;
+            padding: 1px;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+            <div class="etch1">
+                <h1>Employees Logged In and Location</h1>
+            </div>
+            <h2>{{ logged_users_count }}</h2>
+            {% if logged_users %}
+            <ul>
+                    {% for users in logged_users %}
+                    <div class="content">
+                        <h2>{{ users.username }} - BEST Server Room</h2>
+                    </div>
+                    {% endfor %}
+            </ul>
+            {% endif %} 
+</body>
+</html>

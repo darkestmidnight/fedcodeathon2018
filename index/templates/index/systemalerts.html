@@ -25,28 +25,38 @@
             font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
         }
 
+        .etch1 {
+            max-width: 700px;
+            margin-left: 560px;
+        }
+
         .content {
             max-width: 500px;
-            margin: auto;  
+            margin-top: 10px;
+            margin-bottom: 10px;
+            margin-left: auto;
+            margin-right: auto;
             background-color: darkgrey;  
             border-radius: 5px;
-            padding: 5% 5% 5% 5%;
+            padding: 1px;
         }
 
     </style>
 </head>
 <body>
-    <div class="content">
-            <h1>Alerts List</h1>
+            <div class="etch1">
+                <h1>Alerts List</h1>
+            </div>
             {% if alerts_list %}
             <ul>
-                {% for alert in alerts_list %}
-                <h2><!---<a href="{% url 'logged:view_alert' alert.slug %}">-->{{ alert.title }}</a></h2>
-                <h3>{{ alert.description }}</h3>
-                <h3>{{ alert.publish_date }}</h3>
-                {% endfor %}
+                    {% for alert in alerts_list %}
+                    <div class="content">
+                        <h2><!---<a href="{% url 'logged:view_alert' alert.slug %}">-->{{ alert.title }}</a></h2>
+                        <h3>{{ alert.description }}</h3>
+                        <h3>{{ alert.publish_date }}</h3>
+                    </div>
+                    {% endfor %}
             </ul>
-            {% endif %}
-    </div>  
+            {% endif %} 
 </body>
 </html>
