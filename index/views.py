@@ -44,16 +44,12 @@ def user_settings(request):
         updateForm = UpdateUserInfoForm(request.POST, instance=request.user)
         profileForm = UpdateUserProfileForm(request.POST, instance=request.user.profile)
 
-        if updateForm.is_valid():
+        # checks if the update form and profile form, the extension for User models, is valid
+        if updateForm.is_valid() and profileForm.is_valid():
             updateInfo = updateForm.save(commit=False)
             profileInfo = profileForm.save(commit=False)
             updateInfo.save()
             profileInfo.save()
-
-            messages.success(request, "Your profile was successfully updated!")
-        
-        else:
-            messages.error(request, "Please correct the error below.")
 
     else:
         updateForm = UpdateUserInfoForm(instance=request.user)
@@ -66,6 +62,7 @@ def user_settings(request):
 
     return render(request, 'index/settings.html', context)
 
+# posts alerts if the user is an admin
 @user_passes_test(lambda u: u.is_staff)
 def post_alert(request):
     alert_form = AlertsForm(request.POST or None)
@@ -80,6 +77,7 @@ def post_alert(request):
 
     return render(request, 'index/admin.html', context)
 
+# lists all the alerts present within the alert page
 @user_passes_test(lambda u: u.is_staff)
 def list_alert(request):
     alerts_list = Alerts.objects.all().order_by("-publish_date")
@@ -90,6 +88,7 @@ def list_alert(request):
 
     return render(request, 'index/systemalerts.html', context)
 
+# shows the details of the alert
 @user_passes_test(lambda u: u.is_staff)
 def view_alert(request, slug):
     posted_alert = get_object_or_404(Alerts, slug=slug)

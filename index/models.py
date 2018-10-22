@@ -15,9 +15,11 @@ class LoggedUser(models.Model):
   def __unicode__(self):
     return self.username
 
+# records the user when logged in the LoggedUser table
 def login_user(sender, request, user, **kwargs):
   LoggedUser(username=user.username).save()
 
+# deletes user within the LoggedUser table
 def logout_user(sender, request, user, **kwargs):
   try:
     u = LoggedUser.objects.get(pk=user.username)
@@ -46,6 +48,7 @@ def create_user_profile(sender, instance, created, **kwargs):
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
 
+# class to keep track of the alerts made
 class Alerts(models.Model):
     title = models.CharField(max_length=30)
     description = models.TextField(max_length=150)
@@ -55,11 +58,8 @@ class Alerts(models.Model):
     def __str__(self):
         return self.title
 
+    # overrides the save() in Alerts class to generate slugs for unique url
     def save(self, *args, **kwargs):
-        # Generates a random string 
-        #unique_string = get_random_string(length=6)
-
-        # Combines title and unique string to slugify for unique url
         slugtext = self.title 
         self.slug = slugify(slugtext)
 

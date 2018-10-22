@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from .models import Profile, Alerts
 
+# form to update user info (email)
 class UpdateUserInfoForm(forms.ModelForm):
     email = forms.EmailField(required=True)
     class Meta:
@@ -14,6 +15,7 @@ class UpdateUserProfileForm(forms.ModelForm):
         model = Profile
         fields = ('emergency_contact', 'office_location', 'phone_number')
 
+# form to fill up to create an alert
 class AlertsForm(forms.ModelForm):
     class Meta:
         model = Alerts
