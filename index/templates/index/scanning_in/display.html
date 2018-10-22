@@ -80,6 +80,7 @@
 					document.getElementById("statusText").innerHTML = "Scanning...<br><img src=\"../../../static/index/scanning.png\">";
 					document.body.style.background = 'white';
 					personName = getName();
+					console.log(personName);
 					break;
 				case 2:
 					//here we are getting a random employee or verified guest name
@@ -139,7 +140,7 @@
 				//what access they have. In a real world system this could also
 				//go back to a status of waiting for scan as well.
 				if(isAuthorized(doorName,personName)){
-					if(personName == ""){
+					if(workgroups["unverified"].includes(personName)){
 						status = 3;
 					} else {
 						status = 2;
