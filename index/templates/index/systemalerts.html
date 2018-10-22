@@ -2,8 +2,9 @@
 {% if alerts_list %}
 <ul>
     {% for alert in alerts_list %}
-    <h2><a href="{% url 'logged:view_alert' alert.slug %}">{{ alert.title }}</a></h2>
-    <h2>{{ alert.publish_date }}</h2>
+    <h2><!---<a href="{% url 'logged:view_alert' alert.slug %}">-->{{ alert.title }}</a></h2>
+    <h3>{{ alert.description }}</h3>
+    <h3>{{ alert.publish_date }}</h3>
     {% endfor %}
 </ul>
 {% endif %}
