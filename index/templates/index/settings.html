@@ -1,4 +1,4 @@
-<h1>Settings</h1>
+<!-- <h1>Settings</h1>
 <form action="" method="POST" class="update_info-form">{% csrf_token %}
     {{ update_form.as_p }}
     {{ profile_form.as_p }}
@@ -7,4 +7,46 @@
 
 <form action="{% url 'logged:logged_count' %}">
     <input type="submit" value="Go to logged employee count" />
-</form>
+</form> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+
+        body {
+            color: #fff;
+            background: #d47677;
+            font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+        }
+
+        .content {
+            max-width: 500px;
+            margin: auto;  
+            background-color: darkgrey;  
+            border-radius: 5px;
+            padding: 5% 5% 5% 5%;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="content">
+            <h1>Settings</h1>
+            <form action="" method="POST" class="update_info-form">{% csrf_token %}
+                {{ update_form.as_p }}
+                {{ profile_form.as_p }}
+                <button type="submit" class="save btn btn-default">Save</button>
+            </form>
+            
+            <form action="{% url 'logged:logged_count' %}">
+                <input type="submit" value="Go to logged employee count" />
+            </form>
+    </div>  
+</body>
+</html>
